@@ -52,10 +52,10 @@ class BleAdvertisementScanner(
                     super.onBatchScanResults(results)
 
                     if (results == null) return
-                    /*
+
                     results.forEach {
                         log.info("result: ${it.scanRecord?.deviceName}")
-                    }*/
+                    }
 
                     trySend(results)
                         .onFailure {

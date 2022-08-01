@@ -172,7 +172,7 @@ private fun ScanBody(
                 }
             }
 
-            if (BuildConfig.DEBUG && false) {
+            if (BuildConfig.DEBUG && true) {
                 Text("[Debug] Found: $numDevicesFound devices")
                 Text("[Debug] Matching: $numMatchingDevicesInRangeFound devices")
             }

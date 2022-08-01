@@ -1,5 +1,7 @@
 package io.openroad.ble.peripheral
 
+import android.util.Log
+
 /**
  * Created by Antonio García (antonio@openroad.es)
  */
@@ -36,6 +38,7 @@ internal abstract class BleCommand @JvmOverloads constructor(
     }
 
     fun completion(status: Int) {
+        Log.w(this.javaClass.simpleName, "completion status='$status'")
         completionHandler?.let { it(status) }
     }
 

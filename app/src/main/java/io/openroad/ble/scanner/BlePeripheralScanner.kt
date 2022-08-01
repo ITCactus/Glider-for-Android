@@ -113,7 +113,8 @@ class BlePeripheralScanner(
         } else {
             val blePeripheral = BlePeripheral(scanResult)
 
-            //log.info("Found: ${device.nameOrAddress}\nServices: ${device.scanRecord?.serviceUuids?.joinToString { it.uuid.toString() } ?: "none"}")
+            log.info("Found: ${blePeripheral.nameOrAddress}\nServices: ${blePeripheral.scanRecord()?.serviceUuids?.joinToString { it.uuid.toString() } ?: "none"}")
+            log.info("Services: ${blePeripheral.scanRecord()?.serviceUuids?.toString()}")
             blePeripherals.add(blePeripheral)
         }
     }

@@ -74,16 +74,19 @@ class ScanViewModel(
         .map { blePeripherals ->
             // Only peripherals that are manufactured by Adafruit and include theFileTransfer service
             blePeripherals
-                /*.map {
+                .map {
                     log.info("found: ${it.nameOrAddress} -> rssi: ${it.rssi.value}")
                     it
-                }*/
-                .filter {
-                    it.scanRecord()?.isManufacturerAdafruit() ?: false
                 }
-                .filter {
+                /*.filter {
+                    it.scanRecord()?.isManufacturerAdafruit() ?: false
+                }*/
+                /*.filter {
                     val serviceUuids: List<UUID>? = it.scanRecord()?.serviceUuids?.map { it.uuid }
                     serviceUuids?.contains(kFileTransferServiceUUID) ?: false
+                }*/
+                .filter {
+                    it.scanRecord()?.deviceName?.startsWith("InfiniTime") ?: false
                 }
                 .sortedBy { it.createdMillis }
         }
@@ -163,10 +166,10 @@ class ScanViewModel(
                 val selectedPeripheral =
                     blePeripherals
 
-                        /*.map {
-                            log.info("found: ${it.nameOrAddress} -> rssi: ${it.currentRssi} - elapsed: ${it.createdMillis - currentTime}")
+                        .map {
+                            log.info("found: ${it.nameOrAddress} -> rssi: ${it.rssi} - elapsed: ${it.createdMillis - currentTime}")
                             it
-                        }*/
+                        }
                         // Take peripherals that have been matching more than kMinTimeDetectingPeripheralForAutoconnect
                         .filter { currentTime - it.createdMillis > kMinTimeDetectingPeripheralForAutoconnect }
                         // Take the one with higher RSSI
